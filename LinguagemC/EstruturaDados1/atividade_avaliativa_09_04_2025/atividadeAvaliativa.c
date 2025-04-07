@@ -151,7 +151,7 @@ int main(){
                 for (contador = 0; contador < maxContatos && listaContatos[contador].Nome[0] != '\0'; contador++){
                     if (strstr(listaContatos[contador].Nome, buffer) != NULL || strstr(listaContatos[contador].Telefone, buffer) != NULL)
                     {
-                        printf("\n%d\n%s\n%s", contador + 1, listaContatos[contador].Nome, listaContatos[contador].Telefone);
+                        printf("\n%d - \n%s\n%s", contador + 1, listaContatos[contador].Nome, listaContatos[contador].Telefone);
                     }
                     
                 }
