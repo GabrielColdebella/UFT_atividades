@@ -1,0 +1,30 @@
+3 meses de entrevistas
+90 pessoas entrevistadas
+
+presidencia: 17, 26, branco, indeciso
+governador: 17, 26, 31, branco e indeciso
+perguntar idade eleitor
+faixa salarial: 3 opções
+
+função: ler dados das entrevistas e armazenar na memória
+após função: dados devem ser gravados em um arquivo binário
+
+Outro programa/arquivo: busque os dados no arquivo binário e armazene na memória, gerando o relatorio
+
+[1] Intenção de votos para 
+(Mostre a percentagem de votos para 17, 26, brancos e indecisos, contando os três meses.)
+
+[2] Intenção de votos para Governo 
+(Mostre a percentagem de votos para 17, 26, 31, brancos e indecisos, contando os três meses.)
+
+[3] Fidelidade Partidária 
+(mostra o número de pessoas que votaram nos dois candidatos do mesmo partido.)
+
+[4] Intenção à Presidência por faixa salarial
+(dada a faixa salarial, mostre qual candidato venceria.)
+
+[5] Intenção final dos mais jovens 
+(Mostre os candidatos que venceriam na faixa etária abaixo de 30 anos no último mês da pesquisa.)
+
+[6] Relatório por mês
+(Dado o mês, mostre todos os dados coletados neste mês.)
