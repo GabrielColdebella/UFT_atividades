@@ -1,19 +1,31 @@
 # 📚 Projeto Biblioteca
 
-Este é um projeto acadêmico simples de uma **Biblioteca**, desenvolvido com o objetivo de praticar os conceitos de programação orientada a objetos. O sistema permite o gerenciamento de **livros**, **autores** e **empréstimos de livros**.
+Projeto acadêmico que simula o **empréstimo e devolução** de livros em uma biblioteca. Desenvolvido com o objetivo de **praticar** conceitos de programação orientada a objetos.
+Em suma, o sistema permite o **gerenciamente de livros**, **autores** e **empréstimos**.
 
-## ✨ Funcionalidades
+## 🛠️ Funcionalidades
 
 - Cadastro de **livros** com título e autor.
-- Cadastro de **autores**.
-- Realização de **empréstimos** de livros.
+- Cadastro de **autores** com nome e data nascimento.
+- Realização de **empréstimos** de livros, documentando qual livro foi emprestado e quem pegou.
 - Devolução de livros emprestados.
 - Listagem dos livros disponíveis e emprestados.
 
-## 🛠️ Tecnologias Utilizadas
+## ⚙ Tecnologias Utilizadas
 
 - Linguagem: `Java`
-- Ferramenta de compilação: `javac`
-- IDE recomendada: `Eclipse`, `IntelliJ IDEA` ou qualquer editor de texto com suporte a Java.
+- IDE: `Eclipse`
 
 ## 📁 Estrutura do Projeto
+
+projeto_biblioteca/
+├── Main.java # Classe principal
+├── Biblioteca.java # Gerenciador dos livros, autores e empréstimos
+├── Livro.java # Classe que representa livro
+├── Autor.java # Classe que representa autor
+└── Emprestimo.java # Classe que representa empréstimo
+
+## 📌 Observações
+
+- Os dados são mantidos em memória apenas durante a execução do programa.
+- Este projeto é voltado para fins educacionais e pode ser expandido com recursos como persistência em arquivo ou banco de dados.
