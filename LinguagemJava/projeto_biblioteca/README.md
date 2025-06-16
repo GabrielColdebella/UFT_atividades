@@ -19,11 +19,11 @@ Em suma, o sistema permite o **gerenciamente de livros**, **autores** e **empré
 ## 📁 Estrutura do Projeto
 
 projeto_biblioteca/
-├── Main.java # Classe principal
-├── Biblioteca.java # Gerenciador dos livros, autores e empréstimos
-├── Livro.java # Classe que representa livro
-├── Autor.java # Classe que representa autor
-└── Emprestimo.java # Classe que representa empréstimo
+1. Main.java # Classe principal
+2. Biblioteca.java # Gerenciador dos livros, autores e empréstimos
+3. Livro.java # Classe que representa livro
+4. Autor.java # Classe que representa autor
+5. Emprestimo.java # Classe que representa empréstimo
 
 ## 📌 Observações
 
