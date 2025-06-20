@@ -1,0 +1,110 @@
+
+
+
+[X]
+-------------------------------------------------------------------
+
+1.	Modelagem do labirinto
+- Especificar tamanho máximo de mapa e tamanho fixo do genótipo
+- Modelar o labirinto
+- Matriz
+
+2.	Definição do indivíduo
+- Decidir estrutura para armazenar sequência de movimentos
+
+[Fazer] Protótipo de leitura do labirinto e visualização em console
+
+[ ]
+-------------------------------------------------------------------
+
+3.	População Inicial
+- Implementar lista encadeada para a população
+- Criar função de geração aleatoria de individuos (movimentos randomicos)
+
+4.	Simulação de caminho
+- Partindo da posição S, aplicar cada movimento até colisão ou fim do genótipo.
+- Registrar posição final e número de colisões (para penalização).
+
+5.	Função de fitness
+- Calcular distância euclidiana (ou Manhattan) entre ponto final e E.
+- Definir penalidades (colisões).
+- Testar com alguns indivíduos para validar escala de fitness.
+
+[Fazer] Código de geração e avaliação de indivíduos
+[Fazer] Logs de testes iniciais mostrando fitness
+
+[ ]
+-------------------------------------------------------------------
+
+6.	Seleção
+- Implementar torneio binário ou roleta (roulette-wheel).
+- Testar distribuição de seleção (histograma de fitness dos escolhidos).
+
+7.	Crossover
+- Implementar cruzamento de um ponto: trocar segmentos entre dois pais.
+- Garantir comprimento fixo do genótipo filho.
+
+8.	Mutação
+- Definir taxa de mutação (ex.: 5%) e mecanismo de mutação (troca de direção).
+- Verificar que a mutação não gera movimentos inválidos fora do conjunto {C, B, E, D}.
+
+9.	Substituição
+- Estratégia de elitismo (manter N melhores) ou substituição direta dos piores.
+
+[Fazer] Implementação testada de seleção, crossover e mutação
+[Fazer] Relatório curto com estatísticas de variação genética por geração
+
+[ ]
+-------------------------------------------------------------------
+
+10.	Loop Principal
+- Integrar: geracão → avaliação → seleção → cruzamento → mutação → substituição.
+- Controlar número máximo de gerações ou parada ao encontrar solução.
+
+11.	Coleta de Métricas
+- Registrar melhor fitness por geração em vetor.
+- Armazenar também a cadeia de movimentos do melhor indivíduo.
+
+12.	Visualização
+- Plotar gráfico de fitness vs. geração (usar biblioteca simples ou exportar CSV).
+
+[Fazer] Execução completa do AG no labirinto de exemplo
+[Fazer] Gráfico de evolução do fitness
+
+[ ]
+-------------------------------------------------------------------
+
+13.	Testes automatizados
+- Criar mapas de teste (vários tamanhos e formatos) e validar que o AG funciona em todos.
+- Testar parâmetros (taxa de mutação, tamanho de população, comprimento do genótipo).
+
+14.	Análise de desempenho
+- Medir tempo de execução e consumo de memória para configurações diferentes.
+
+15.	Documentação
+- Escrever relatório:
+- Representação do indivíduo
+- Fórmula de fitness e penalizações
+- Parâmetros escolhidos (população, mutação, gerações)
+- Gráfico de evolução
+- Prints/logs das melhores soluções por geração
+
+[Fazer] Código-fonte comentado
+[Fazer] Relatório completo em PDF ou Markdown
+[Fazer] Slides ou demonstração executável
+
+[ ]
+-------------------------------------------------------------------
+
+16. Notas gerais do gepeto
+- Incrementalidade: valide cada módulo (parser, simulação, seleção…) antes de seguir.
+- Versionamento: use Git desde o início, criando branches para cada fase.
+- Parâmetros configuráveis: leia de arquivo ou linha de comando para facilitar experimentos.
+- Logs detalhados: inclua data/hora, geração e melhor fitness para facilitar debugging.
+
+-------------------------------------------------------------------
+
+
+
+
+
