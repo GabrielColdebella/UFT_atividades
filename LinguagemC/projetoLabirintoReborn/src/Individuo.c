@@ -86,7 +86,7 @@ int TIndividuoPercorre(TIndividuo *ti)
             break;
         }
     }
-
+    
     if (chegou)
     {
         ti->fitness = 1000;
