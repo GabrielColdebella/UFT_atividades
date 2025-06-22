@@ -1,107 +1,222 @@
 #include "Populacao.h"
 #include <stdlib.h>
 #include <stdio.h>
-#include<stdbool.h>
+#include <stdbool.h>
 
-
-typedef struct _no{
+typedef struct _no
+{
     TIndividuo conteudo;
     struct _no *prox;
-}TNo;
-TNo* TNo_criaEPreenche(TIndividuo);
+} TNo;
+TNo *TNo_criaEPreenche(TIndividuo);
 
-typedef struct _list{
-    TNo* inicio;
-}TLinkedList;
+typedef struct _list
+{
+    TNo *inicio;
+} TLinkedList;
 
-
-TLinkedList* lista_criar(){
-    TLinkedList* nova = malloc(sizeof(TLinkedList));
-    if(nova){
+TLinkedList *lista_criar()
+{
+    TLinkedList *nova = malloc(sizeof(TLinkedList));
+    if (nova)
+    {
         nova->inicio = NULL;
     }
     return nova;
 }
 
+bool lista_insere_comeco(TLinkedList *lista, TIndividuo conteudo)
+{
+    TNo *novo = TNo_criaEPreenche(conteudo);
+    if (novo == NULL)
+        return false;
 
-bool lista_insere_comeco(TLinkedList* lista, TIndividuo conteudo){
-    TNo* novo = TNo_criaEPreenche(conteudo);
-    if(novo == NULL) return false;
-    if(lista->inicio != NULL)
+    if (lista->inicio != NULL)
         novo->prox = lista->inicio;
     lista->inicio = novo;
     return true;
 }
 
-bool lista_insere_fim(TLinkedList* lista, TIndividuo conteudo){
-    TNo* novo = TNo_criaEPreenche(conteudo);
-    if(novo == NULL) return false;
-    //A lista está vazia?
-    if(lista->inicio == NULL)
+bool lista_insere_fim(TLinkedList *lista, TIndividuo conteudo)
+{
+    TNo *novo = TNo_criaEPreenche(conteudo);
+    if (novo == NULL)
+        return false;
+
+    // A lista está vazia?
+    if (lista->inicio == NULL)
         lista->inicio = novo;
-    else{
-        //Lista nao vazia, temos que encontrar o último elemento
-        TNo* aux = lista->inicio;
-        while(aux->prox!=NULL)
+    else
+    {
+        // Lista nao vazia, temos que encontrar o último elemento
+        TNo *aux = lista->inicio;
+        while (aux->prox != NULL)
             aux = aux->prox;
         aux->prox = novo;
     }
     return true;
 }
 
+void lista_imprime(TLinkedList *lista)
+{
+    TNo *aux = lista->inicio;
 
-void lista_imprime(TLinkedList* lista){
-    TNo* aux = lista->inicio;
-    while(aux!=NULL){
+    while (aux != NULL)
+    {
         TIndividuoImprime(aux->conteudo);
         aux = aux->prox;
     }
     putchar('\n');
 }
 
-TNo* TNo_criaEPreenche(TIndividuo conteudo){
-    TNo* novo = malloc(sizeof(TNo));
-    if(novo){
+TNo *TNo_criaEPreenche(TIndividuo conteudo)
+{
+    TNo *novo = malloc(sizeof(TNo));
+    if (novo)
+    {
         novo->conteudo = conteudo;
         novo->prox = NULL;
     }
     return novo;
 }
 
-//Resolve a parte de lista encadeada
-// -------------------------------------------------------------------------
-//Começa a solucionar o problema da população
+// resolve a parte de lista encadeada
+//  -------------------------------------------------------------------------
+// soluciona o problema da organização dos dados
+
+// concatena 2 listas
+TLinkedList *lista_concatenar(TLinkedList *l1, TLinkedList *l2)
+{
+    if (!l1->inicio)
+    {
+        free(l1);
+        return l2;
+    }
+
+    TNo *aux = l1->inicio;
+    while (aux->prox)
+        aux = aux->prox;
+    aux->prox = l2->inicio;
+    free(l2);
+    return l1;
+}
+
+// separa os individuos de acordo com o fitness em 3 grupo (>, <, ==)
+// faz isso recursivamente para que a lista final apresente os dados de forma decrescente
+TLinkedList *lista_quicksort(TLinkedList *lista)
+{
+    // lista vazia ou com 1 elemento
+    if (!lista || !lista->inicio || !lista->inicio->prox)
+        return lista;
+
+    //  menor, igual ou maior que o pivo (primeiro elemento)
+    TLinkedList *menor = lista_criar();
+    TLinkedList *igual = lista_criar();
+    TLinkedList *maior = lista_criar();
+
+    TNo *aux = lista->inicio;
+
+    //  acessando o primeiro elemento
+    float pivo = aux->conteudo.fitness;
+
+    while (aux != NULL)
+    {
+        if (aux->conteudo.fitness < pivo)
+        {
+            lista_insere_fim(menor, aux->conteudo);
+        }
+        else if (aux->conteudo.fitness > pivo)
+        {
+            lista_insere_fim(maior, aux->conteudo);
+        }
+        else
+        {
+            lista_insere_fim(igual, aux->conteudo);
+        }
+
+        aux = aux->prox;
+    }
+
+    free(lista);
+
+    menor = lista_quicksort(menor);
+    maior = lista_quicksort(maior);
+
+    // decrescente
+    TLinkedList *listaFinal = lista_concatenar(maior, igual);
+    listaFinal = lista_concatenar(listaFinal, menor);
+
+    // crescente
+    //  TLinkedList *listaFinal = lista_concatenar(menor, igual);
+    //  listaFinal = lista_concatenar(listaFinal, maior);
+
+    return listaFinal;
+}
+
+//  -------------------------------------------------------------------------
+// começa a solucionar o problema da população
 
 TLinkedList *criar_populacao_inicial()
 {
     TLinkedList *popInicial = lista_criar();
 
-    char movimentos[] = {'C', 'B', 'D', 'E'};
-
     for (int i = 1; i <= maxPopulacao; i++)
     {
-        TIndividuo ti;
-        ti.id = i;
-        ti.qtdMovimentos = qtdMovimentosMax;
-        // ti.fitness = rand() % 100 + 0;
-        ti.fitness = 0;
-
-        for (int j = 0; j < qtdMovimentosMax; j++)
-        {
-            ti.seqMovimentos[j] = movimentos[rand() % 4 + 0];
-        }
-
-        if (!lista_insere_fim(popInicial, ti))
+        if (!lista_insere_fim(popInicial, TIndividuoCriar()))
             break;
     }
     return popInicial;
 }
 
-void populacao_percorre(TLinkedList* lista){
-    TNo* aux = lista->inicio;
-    while(aux!=NULL){
-        TIndividuoPercorre(aux->conteudo);
+int populacao_percorre(TLinkedList *lista)
+{
+    TNo *aux = lista->inicio;
+    while (aux != NULL)
+    {
+        if(TIndividuoPercorre(&aux->conteudo)){
+            return 1;
+        };
         aux = aux->prox;
     }
-    putchar('\n');
+    return 0;
+}
+
+TLinkedList *populacao_crossover(TLinkedList *lista)
+{
+    TNo *aux = lista->inicio;
+    TIndividuo temp;
+    TLinkedList *nova = lista_criar();
+    int i = 0;
+
+    while (aux != NULL && i < maxPopulacao * porcentagemMelhores / 100)
+    {
+        if (i % 2 == 0)
+        {
+            temp = aux->conteudo;
+        }
+        else
+        {
+            for (int j = 0; j < 2; j++)
+            {
+                lista_insere_fim(nova, TIndividuoCrossover(&temp, &aux->conteudo));
+            }
+        }
+        i = i + 1;
+        aux = aux->prox;
+    }
+    return lista_concatenar(nova, lista);
+}
+
+// ignorara a geração atual(quem nao tiver fintess) e substituira a geracao anterior(quem tiver fitness)
+void populacao_substituicao(TLinkedList *lista)
+{
+    TNo *aux = lista->inicio;
+    while (aux != NULL)
+    {
+        if (aux->conteudo.fitness != 0)
+        {
+            aux->conteudo = TIndividuoCriar();
+        }
+        aux = aux->prox;
+    }
 }

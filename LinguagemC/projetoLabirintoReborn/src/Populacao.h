@@ -4,7 +4,8 @@ Lista encadeada da população; seleção e substituição.
 
 #ifndef POPULACAO_H
 #define POPULACAO_H
-#define maxPopulacao 500
+#define maxPopulacao 100
+#define porcentagemMelhores 25
 #include<stdbool.h>
 #include "Individuo.h"
 
@@ -50,8 +51,11 @@ bool list_delete_begin(TLinkedList*);
 void lista_imprime(TLinkedList*);
 
 TLinkedList *criar_populacao_inicial();
-void populacao_percorre(TLinkedList* lista);
-void populacao_imprime_melhores(TLinkedList* lista);
+int populacao_percorre(TLinkedList* lista);
 bool criar_populacao_crossover(TLinkedList*);
 
+TLinkedList* lista_concatenar(TLinkedList* l1, TLinkedList* l2);
+TLinkedList *lista_quicksort(TLinkedList *lista);
+TLinkedList *populacao_crossover(TLinkedList *lista);
+void populacao_substituicao(TLinkedList *lista);
 #endif

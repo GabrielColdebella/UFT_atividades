@@ -14,7 +14,7 @@
 
 [Fazer] Protótipo de leitura do labirinto e visualização em console
 
-[ ]
+[X]
 -------------------------------------------------------------------
 
 3.	População Inicial

@@ -4,8 +4,8 @@ Parser (tira do texto e bota em codigo) do arquivo ASCII e funções de acesso �
 
 #ifndef MAPA_H
 #define MAPA_H
-#define MAPHEI 10
-#define MAPWID 10
+#define MAPHEI 20
+#define MAPWID 20
 #include <stdbool.h>
 
 void mapaVisualizar(char matriz[MAPHEI][MAPWID]);
