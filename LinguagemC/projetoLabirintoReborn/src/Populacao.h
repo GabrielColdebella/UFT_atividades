@@ -57,5 +57,5 @@ bool criar_populacao_crossover(TLinkedList*);
 TLinkedList* lista_concatenar(TLinkedList* l1, TLinkedList* l2);
 TLinkedList *lista_quicksort(TLinkedList *lista);
 TLinkedList *populacao_crossover(TLinkedList *lista);
-void populacao_substituicao(TLinkedList *lista);
+TLinkedList *populacao_substituicao(TLinkedList *lista);
 #endif

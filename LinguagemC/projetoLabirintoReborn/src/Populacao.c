@@ -59,12 +59,20 @@ bool lista_insere_fim(TLinkedList *lista, TIndividuo conteudo)
 
 void lista_imprime(TLinkedList *lista)
 {
+    if (lista == NULL) {
+        printf("Lista esta nula\n");
+        return;
+    }
+
     TNo *aux = lista->inicio;
+    int i = 0;
 
     while (aux != NULL)
     {
+        printf("Imprimindo individuo #%d;", i);
         TIndividuoImprime(aux->conteudo);
         aux = aux->prox;
+        i++;
     }
     putchar('\n');
 }
@@ -174,6 +182,12 @@ int populacao_percorre(TLinkedList *lista)
     while (aux != NULL)
     {
         if(TIndividuoPercorre(&aux->conteudo)){
+            printf("\nseq de movimentos do ganhador\t");
+            for (int i = 0; i < qtdMovimentosMax; i++)
+            {
+                printf("%c, ", aux->conteudo.seqMovimentos[i]);
+            }
+            TIndividuoVisualizarSeqMovimentos(&aux->conteudo);
             return 1;
         };
         aux = aux->prox;
@@ -208,15 +222,29 @@ TLinkedList *populacao_crossover(TLinkedList *lista)
 }
 
 // ignorara a geração atual(quem nao tiver fintess) e substituira a geracao anterior(quem tiver fitness)
-void populacao_substituicao(TLinkedList *lista)
+TLinkedList *populacao_substituicao(TLinkedList *lista)
 {
+    TLinkedList *nova = lista_criar();
     TNo *aux = lista->inicio;
+    TNo *temp = nova->inicio;
+    int i = 0;
+
     while (aux != NULL)
     {
-        if (aux->conteudo.fitness != 0)
+        if (aux->conteudo.fitness == 0)
         {
-            aux->conteudo = TIndividuoCriar();
+            lista_insere_fim(nova, aux->conteudo);
+            i++;
         }
         aux = aux->prox;
     }
+
+    free(lista);
+
+    for (int j = 0; j < maxPopulacao - i; j++)
+    {
+        lista_insere_fim(nova, TIndividuoCriar());
+    }
+    
+    return nova;
 }

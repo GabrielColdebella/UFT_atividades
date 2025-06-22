@@ -10,32 +10,30 @@ int main()
 {
     srand(time(NULL));
 
-    char sair = 'n';
     int geracao = 0;
+    int sair = 0;
     TLinkedList *pop = criar_populacao_inicial();
 
-    while (sair != 's')
+    // && geracao < 2
+    while (sair != 1)
     {
         printf("Geracao: %d\n", geracao);
-        if (populacao_percorre(pop) == 1)
+        sair = populacao_percorre(pop);
+
+        if (sair == 1)
         {
-            lista_imprime(pop);
             printf("Encerrou na geracao: %d\n", geracao);
+            // lista_imprime(pop);
             break;
         }
         else
         {
             pop = lista_quicksort(pop);
             pop = populacao_crossover(pop);
-            populacao_substituicao(pop);
+            pop = populacao_substituicao(pop);
         }
-        
-        // if (geracao % 25 == 0)
-        //     scanf("%c", &sair);
-        
         geracao++;
     }
-    lista_imprime(pop);
 
     return 0;
 }

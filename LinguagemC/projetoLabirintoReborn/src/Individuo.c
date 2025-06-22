@@ -37,62 +37,69 @@ void TIndividuoImprime(TIndividuo ti)
 
 int TIndividuoPercorre(TIndividuo *ti)
 {
-    char matriz[MAPHEI][MAPHEI];
+    char matriz[MAPHEI][MAPWID];
     int coordenadaEntSai[2][2];
     mapaImportar(matriz, coordenadaEntSai);
 
-    int posAtual[2];
-    posAtual[0] = coordenadaEntSai[0][0];
-    posAtual[1] = coordenadaEntSai[0][1];
+    int posAtualY = coordenadaEntSai[0][0];
+    int posAtualX = coordenadaEntSai[0][1];
+    bool chegou = false;
 
     for (int i = 0; i < ti->qtdMovimentos; i++)
     {
+        int novaY = posAtualY;
+        int novaX = posAtualX;
 
-        if (ti->seqMovimentos[i] == 'C' && matriz[posAtual[0] - 1][posAtual[1]] != '#')
+        // calcula a tentativa de passo
+        switch (ti->seqMovimentos[i])
         {
-            if (matriz[posAtual[0]][posAtual[1]] == ' ')
-            {
-                matriz[posAtual[0]][posAtual[1]] = '.';
-            }
-            posAtual[0] = posAtual[0] - 1;
-        }
-        else if (ti->seqMovimentos[i] == 'B' && matriz[posAtual[0] + 1][posAtual[1]] != '#')
-        {
-            if (matriz[posAtual[0]][posAtual[1]] == ' ')
-            {
-                matriz[posAtual[0]][posAtual[1]] = '.';
-            }
-            posAtual[0] = posAtual[0] + 1;
-        }
-        else if (ti->seqMovimentos[i] == 'D' && matriz[posAtual[0]][posAtual[1] + 1] != '#')
-        {
-            if (matriz[posAtual[0]][posAtual[1]] == ' ')
-            {
-                matriz[posAtual[0]][posAtual[1]] = '.';
-            }
-            posAtual[1] = posAtual[1] + 1;
-        }
-        else if (ti->seqMovimentos[i] == 'E' && matriz[posAtual[0]][posAtual[1] - 1] != '#')
-        {
-            if (matriz[posAtual[0]][posAtual[1]] == ' ')
-            {
-                matriz[posAtual[0]][posAtual[1]] = '.';
-            }
-            posAtual[1] = posAtual[1] - 1;
+        case 'C':
+            novaY--;
+            break;
+        case 'B':
+            novaY++;
+            break;
+        case 'D':
+            novaX++;
+            break;
+        case 'E':
+            novaX--;
+            break;
         }
 
-        if ((posAtual[0] == coordenadaEntSai[1][0] && posAtual[1] == coordenadaEntSai[1][1]) || matriz[posAtual[0]][posAtual[1]] == 'S')
+        // se bateu num muro, interrompe o loop
+        if (matriz[novaY][novaX] == '#')
+            break;
+
+        // marca o passo (opcional, para visualização)
+        if (matriz[posAtualY][posAtualX] == ' ')
+            matriz[posAtualY][posAtualX] = '.';
+
+        // atualiza posição
+        posAtualY = novaY;
+        posAtualX = novaX;
+
+        // checa se chegou na saída
+        if (matriz[posAtualY][posAtualX] == 'S')
         {
-            ti->fitness = 1000;
-            return 1;
-        }
-        else
-        {
-            ti->fitness = 1000 - sqrt(pow((posAtual[0] - coordenadaEntSai[1][0]), 2) + pow((posAtual[1] - coordenadaEntSai[1][1]), 2)) * 10 - 300;
+            chegou = true;
             break;
         }
     }
-    return 0;
+
+    if (chegou)
+    {
+        ti->fitness = 1000;
+        return 1;
+    }
+    else
+    {
+        //penaliza pela distancia restante (dist euclidiana)
+        float dx = posAtualY - coordenadaEntSai[1][0];
+        float dy = posAtualX - coordenadaEntSai[1][1];
+        ti->fitness = 1000 - sqrt(dx * dx + dy * dy) * 10 - 300;
+        return 0;
+    }
 }
 
 TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
@@ -104,9 +111,9 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
     // escolhe aleatoriamente de qual pai vai ser a primeira parte do genes
     int genesInicial = rand() % 2;
 
-    //gera uma mutação em um lugar aleatorio
+    // gera uma mutação em um lugar aleatorio
     int mutacaoComeco;
-    //coloca um fim na mutação em algum lugar apos o começo
+    // coloca um fim na mutação em algum lugar apos o começo
     int mutacaoFinal;
     char movimentos[4] = {'C', 'B', 'D', 'E'};
 
@@ -136,9 +143,10 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
         }
     }
 
-    //mutação
-    //altera em um lugar e quantidade aleatoria o genes do filho
-    if (rand() % 100 < porcentagemMutacao){
+    // mutação
+    // altera em um lugar e quantidade aleatoria o genes do filho
+    if (rand() % 100 < porcentagemMutacao)
+    {
         mutacaoComeco = rand() % qtdMovimentosMax;
         mutacaoFinal = mutacaoComeco + rand() % (qtdMovimentosMax - mutacaoComeco);
 
@@ -149,4 +157,68 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
     }
 
     return filho;
+}
+
+int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti)
+{
+    char matriz[MAPHEI][MAPWID];
+    int coordenadaEntSai[2][2];
+    mapaImportar(matriz, coordenadaEntSai);
+
+    int posAtualY = coordenadaEntSai[0][0];
+    int posAtualX = coordenadaEntSai[0][1];
+    bool chegou = false;
+
+    for (int i = 0; i < ti->qtdMovimentos; i++)
+    {
+        int novaY = posAtualY;
+        int novaX = posAtualX;
+
+        // calcula a tentativa de passo
+        switch (ti->seqMovimentos[i])
+        {
+        case 'C':
+            novaY--;
+            break;
+        case 'B':
+            novaY++;
+            break;
+        case 'D':
+            novaX++;
+            break;
+        case 'E':
+            novaX--;
+            break;
+        }
+
+        // interrompe se bateu na #
+        if (matriz[novaY][novaX] == '#')
+            break;
+
+        // marca o passo
+        if (matriz[posAtualY][posAtualX] == ' ')
+            matriz[posAtualY][posAtualX] = '.';
+
+        // atualiza posição
+        posAtualY = novaY;
+        posAtualX = novaX;
+
+        // verifica se chegou na saída
+        if (matriz[posAtualY][posAtualX] == 'S')
+        {
+            chegou = true;
+            break;
+        }
+    }
+
+    if (chegou)
+    {
+        mapaVisualizar(matriz);
+        mapaExportar(matriz);
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
