@@ -1,0 +1,76 @@
+package lista01Classes;
+
+public class Voo {
+	private int nPassageiros;
+	private Integer[] vPassageiros = new Integer[100];
+	private int nVoo;
+	private DataApp dataVoo;
+	
+	public Voo(int nPassageiros, int nVoo, DataApp dataVoo) {
+		this.nPassageiros = nPassageiros;
+		this.nVoo = nVoo;
+		this.dataVoo = dataVoo;
+	}
+	
+	public int proximoLivre() {
+		for (int i = 0; i < nPassageiros; i++) {
+			if(vPassageiros[i] != 1) {
+				return i;
+			} 
+		}
+		return -1;
+	}
+	
+	public Boolean verifica(int vaga) {
+		if(vPassageiros[vaga] == 1) {
+			System.out.println("Está ocupada!");
+			return true;
+		}
+		return false;
+	}
+	
+	public Boolean ocupa(int vaga) {
+		if(verifica(vaga)) {
+			return false;
+		} else {
+			vPassageiros[vaga] = 1;
+			nPassageiros++;
+			return true;
+		}
+	}
+	
+	public int vagas() {
+		return 100 - nPassageiros;
+	}
+
+	public int getnPassageiros() {
+		return nPassageiros;
+	}
+
+	public void setnPassageiros(int nPassageiros) {
+		this.nPassageiros = nPassageiros;
+	}
+
+
+
+	public int getnVoo() {
+		return nVoo;
+	}
+
+	public void setnVoo(int nVoo) {
+		this.nVoo = nVoo;
+	}
+
+	public DataApp getDataVoo() {
+		return dataVoo;
+	}
+
+	public void setDataVoo(DataApp dataVoo) {
+		this.dataVoo = dataVoo;
+	}
+	
+	public Voo clone() {
+		return Voo;
+	}
+
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="false"/>
+		<list key="findhistory">
+			<item value="listarLivrosFormatado"/>
+			<item value="next()"/>
+			<item value="encontrarAutorPorId"/>
+			<item value="empres"/>
+			<item value="remover"/>
+		</list>
+	</section>
+</section>

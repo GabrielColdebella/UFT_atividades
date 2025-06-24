@@ -1,0 +1,5 @@
+package pacote;
+
+public class Chamar {
+	int chamado = 0;
+}

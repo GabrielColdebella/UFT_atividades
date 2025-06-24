@@ -1,0 +1,17 @@
+package lista01Classes;
+
+public class Voo {
+	private int nPassageiros;
+	private int nVoo;
+	
+	
+	
+
+	public int getnPassageiros() {
+		return nPassageiros;
+	}
+
+	public void setnPassageiros(int nPassageiros) {
+		this.nPassageiros = nPassageiros;
+	}
+}

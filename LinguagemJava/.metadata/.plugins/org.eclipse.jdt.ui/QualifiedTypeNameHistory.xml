@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="project_questao1.IProduto"/>
+    <fullyQualifiedTypeName name="project_questao1.IProdutoFabricado"/>
+    <fullyQualifiedTypeName name="project_questao1.ProdutosComprados"/>
+    <fullyQualifiedTypeName name="project_questao1.ProdutosFabricados"/>
+    <fullyQualifiedTypeName name="teste.Main"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="java.io.InputStream"/>
+    <fullyQualifiedTypeName name="java.util.stream.Stream"/>
+    <fullyQualifiedTypeName name="projeto_biblioteca.Emprestimo"/>
+    <fullyQualifiedTypeName name="java.time.LocalDate"/>
+</qualifiedTypeNameHistroy>

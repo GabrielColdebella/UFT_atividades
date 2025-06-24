@@ -9,7 +9,7 @@ public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Biblioteca bltc = new Biblioteca();
-		int opcao = 0, opcao1 = 0, opcao2, opcao3, usuario;
+		int opcao = 0, opcao2, opcao3, usuario = 0;
 		
 		Autor[] exAutor = new Autor[3];
 		Livro[] exLivro = new Livro[3];
@@ -28,13 +28,13 @@ public class Main {
 		
 		bltc.adicionarEmprestimo(exLivro[1], "usuario1");
 		
-		while(opcao1 != 2) {
+		while(usuario != 2) {
 			
 			do {
 				System.out.println("\nQuem é você?");
 				System.out.println("0. Funcionário\n1. Usuário\n2. Sair\nOpção:");
 				usuario = sc.nextInt();
-			} while (usuario < 0 || usuario >= 2);
+			} while (usuario < 0 || usuario > 2);
 			
 			// parte do funcionario (administra os livros)
 			if(usuario == 0) {

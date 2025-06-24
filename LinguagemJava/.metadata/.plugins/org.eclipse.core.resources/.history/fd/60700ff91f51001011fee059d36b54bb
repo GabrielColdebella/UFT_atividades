@@ -1,0 +1,7 @@
+package lista02Classes;
+
+public class Gabarito {
+	public char respostaQuestao(int numeroQuestao) {
+		return 'c';
+	}
+}

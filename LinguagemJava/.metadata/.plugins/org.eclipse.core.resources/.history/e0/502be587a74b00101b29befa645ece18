@@ -1,0 +1,71 @@
+package lista01Classes;
+
+//media para aprovar - 6
+public class Q1 {
+	private String matricula;
+	private String nome;
+	private float p1;
+	private float p2;
+	private float t1;
+	
+	public Q1(String matricula, String nome, float p1, float p2, float t1) {
+		this.matricula = matricula;
+		this.nome = nome;
+		this.p1 = p1;
+		this.p2 = p2;
+		this.t1 = t1;
+	}
+
+	public float calculaMedia() {
+		float mediaFinal = (float) ((p1 * 2.5 + p2 * 2.5 + t1 * 2)/(2.5 + 2.5 + 2));
+		return mediaFinal;
+	}
+	
+	public float calculaMediaFinal(float notaMedia) {
+		if(notaMedia > 6) return 0;
+			return 6 - notaMedia;
+		
+	}
+
+	public String getMatricula() {
+		return matricula;
+	}
+
+	public void setMatricula(String matricula) {
+		this.matricula = matricula;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public float getP1() {
+		return p1;
+	}
+
+	public void setP1(float p1) {
+		this.p1 = p1;
+	}
+
+	public float getP2() {
+		return p2;
+	}
+
+	public void setP2(float p2) {
+		this.p2 = p2;
+	}
+
+	public float getT1() {
+		return t1;
+	}
+
+	public void setT1(float t1) {
+		this.t1 = t1;
+	}
+	
+	
+}

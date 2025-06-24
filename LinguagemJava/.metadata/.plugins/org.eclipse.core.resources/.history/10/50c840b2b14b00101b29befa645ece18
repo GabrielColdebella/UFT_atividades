@@ -1,0 +1,58 @@
+package lista01Classes;
+
+public class Voo {
+	private int nPassageiros;
+	private Integer[] vPassageiros = new Integer[100];
+	private int nVoo;
+	private DataApp dataVoo;
+	
+	public Voo(int nPassageiros, int nVoo, DataApp dataVoo) {
+		this.nPassageiros = nPassageiros;
+		this.nVoo = nVoo;
+		this.dataVoo = dataVoo;
+	}
+	
+	public int proximoLivre() {
+		for (int i = 0; i < nPassageiros; i++) {
+			if(vPassageiros[i] != 1) {
+				
+			}
+		}
+		return 0;
+	}
+
+	public int getnPassageiros() {
+		return nPassageiros;
+	}
+
+	public void setnPassageiros(int nPassageiros) {
+		this.nPassageiros = nPassageiros;
+	}
+
+	public Integer[][] getvPassageiros() {
+		return vPassageiros;
+	}
+
+	public void setvPassageiros(Integer[][] vPassageiros) {
+		this.vPassageiros = vPassageiros;
+	}
+
+	public int getnVoo() {
+		return nVoo;
+	}
+
+	public void setnVoo(int nVoo) {
+		this.nVoo = nVoo;
+	}
+
+	public DataApp getDataVoo() {
+		return dataVoo;
+	}
+
+	public void setDataVoo(DataApp dataVoo) {
+		this.dataVoo = dataVoo;
+	}
+	
+
+
+}

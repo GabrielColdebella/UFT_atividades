@@ -1,0 +1,18 @@
+package lista01Classes;
+import java.time.LocalDate;
+
+public class Voo {
+	private int nPassageiros;
+	private int nVoo;
+	
+	
+	
+
+	public int getnPassageiros() {
+		return nPassageiros;
+	}
+
+	public void setnPassageiros(int nPassageiros) {
+		this.nPassageiros = nPassageiros;
+	}
+}

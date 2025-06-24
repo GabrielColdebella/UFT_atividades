@@ -1,0 +1,8 @@
+package lista01Classes;
+
+public class Main {
+	public static void main(String[] args) {
+		DataApp dat = new DataApp(17, 07, 2025);
+		System.out.println(dat.getAno());
+	}
+}

@@ -1,0 +1,9 @@
+INDEX VERSION 1.134+C:\Users\ghcso\Documents\UFT\Programacao\LinguagemJava\.metadata\.plugins\org.eclipse.jdt.core
+3337896781.index
+3927496509.index
+227881790.index
+1865797976.index
+2217079160.index
+1388515721.index
+1576382482.index
+1058137336.index
