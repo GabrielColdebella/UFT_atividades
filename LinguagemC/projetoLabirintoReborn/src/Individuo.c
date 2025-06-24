@@ -4,14 +4,16 @@
 TIndividuo TIndividuoCriar()
 {
     char movimentos[4] = {'C', 'B', 'D', 'E'};
-    int static idIndividuo = 0;
-
+    int static idIndividuo = 0, i;
     TIndividuo ti;
+
+    // acessa o individuo e insere os dados
     ti.id = idIndividuo++;
     ti.qtdMovimentos = qtdMovimentosMax;
     ti.fitness = 0;
 
-    for (int i = 0; i < qtdMovimentosMax; i++)
+    // monta aleatoriamente a sequencia de movimentos do invididuo
+    for (i = 0; i < qtdMovimentosMax; i++)
         ti.seqMovimentos[i] = movimentos[rand() % 4 + 0];
 
     return ti;
@@ -19,8 +21,11 @@ TIndividuo TIndividuoCriar()
 
 void TIndividuoImprime(TIndividuo ti)
 {
-    printf("id: %d\t%d\t", ti.id, ti.qtdMovimentos);
-    for (int i = 0; i < qtdMovimentosMax; i++)
+    int i;
+
+    // imprime o id, os movimentos e o fitness do individuo
+    printf("id: %d\t", ti.id);
+    for (i = 0; i < qtdMovimentosMax; i++)
     {
         if (i == qtdMovimentosMax - 1)
         {
@@ -37,20 +42,24 @@ void TIndividuoImprime(TIndividuo ti)
 
 int TIndividuoPercorre(TIndividuo *ti)
 {
+    // inicializa variaveis e logo preenche com os dados do mapa
+    // formato do labirinto e coordenada da entrada e saida
     char matriz[MAPHEI][MAPWID];
-    int coordenadaEntSai[2][2];
+    int coordenadaEntSai[2][2], i;
     mapaImportar(matriz, coordenadaEntSai);
 
+    // monta a posição atual y e x de acordo com a coordenada da entrada
     int posAtualY = coordenadaEntSai[0][0];
     int posAtualX = coordenadaEntSai[0][1];
-    bool chegou = false;
+    int chegou = false;
 
-    for (int i = 0; i < ti->qtdMovimentos; i++)
+    for (i = 0; i < ti->qtdMovimentos; i++)
     {
+        // a proxima posição recebe a coordenada atual
         int novaY = posAtualY;
         int novaX = posAtualX;
 
-        // calcula a tentativa de passo
+        //"calcula" o movimento
         switch (ti->seqMovimentos[i])
         {
         case 'C':
@@ -67,13 +76,9 @@ int TIndividuoPercorre(TIndividuo *ti)
             break;
         }
 
-        // se bateu num muro, interrompe o loop
+        // se bater em um muro, interrompe o loop
         if (matriz[novaY][novaX] == '#')
             break;
-
-        // marca o passo (opcional, para visualização)
-        if (matriz[posAtualY][posAtualX] == ' ')
-            matriz[posAtualY][posAtualX] = '.';
 
         // atualiza posição
         posAtualY = novaY;
@@ -86,18 +91,20 @@ int TIndividuoPercorre(TIndividuo *ti)
             break;
         }
     }
-    
+
+    // se chegou, o fitness é mil.
+    // Caso contrario, calcula a dist euclidiana
     if (chegou)
     {
-        ti->fitness = 1000;
+        ti->fitness = 100;
         return 1;
     }
     else
     {
-        //penaliza pela distancia restante (dist euclidiana)
+        // pontua de acordo da distancia entre a posAtual e a saida
         float dx = posAtualY - coordenadaEntSai[1][0];
         float dy = posAtualX - coordenadaEntSai[1][1];
-        ti->fitness = 1000 - sqrt(dx * dx + dy * dy) * 10 - 300;
+        ti->fitness = 100 - sqrt(dx * dx + dy * dy) * 10 - PENALIDADE;
         return 0;
     }
 }
@@ -106,8 +113,8 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
 {
     TIndividuo filho = TIndividuoCriar();
 
-    // escolhe o ponto de separação entre 25% e 75% da sequencia de movimentos
-    int pontoCorte = rand() % (qtdMovimentosMax / 2 + 1) + qtdMovimentosMax / 4;
+    // escolhe o ponto de separação dos genes entre 25% e 75% da sequencia de movimentos
+    int pontoCorte = rand() % (qtdMovimentosMax / 2 + 1) + qtdMovimentosMax / 4, i, j;
     // escolhe aleatoriamente de qual pai vai ser a primeira parte do genes
     int genesInicial = rand() % 2;
 
@@ -117,7 +124,7 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
     int mutacaoFinal;
     char movimentos[4] = {'C', 'B', 'D', 'E'};
 
-    for (int j = 0; j < qtdMovimentosMax; j++)
+    for (j = 0; j < qtdMovimentosMax; j++)
     {
         if (j < pontoCorte)
         {
@@ -143,14 +150,13 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
         }
     }
 
-    // mutação
-    // altera em um lugar e quantidade aleatoria o genes do filho
+    // mutação - altera em um lugar e quantidade aleatoria o genes do filho
     if (rand() % 100 < porcentagemMutacao)
     {
         mutacaoComeco = rand() % qtdMovimentosMax;
         mutacaoFinal = mutacaoComeco + rand() % (qtdMovimentosMax - mutacaoComeco);
 
-        for (int i = mutacaoComeco; i < mutacaoFinal; i++)
+        for (i = mutacaoComeco; i < mutacaoFinal; i++)
         {
             filho.seqMovimentos[i] = movimentos[rand() % 4 + 0];
         }
@@ -161,20 +167,24 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
 
 int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti)
 {
+    // inicializa variaveis e logo preenche com os dados do mapa
+    // formato do labirinto e coordenada da entrada e saida
     char matriz[MAPHEI][MAPWID];
     int coordenadaEntSai[2][2];
     mapaImportar(matriz, coordenadaEntSai);
 
+    // monta a posição atual y e x de acordo com a coordenada da entrada
     int posAtualY = coordenadaEntSai[0][0];
     int posAtualX = coordenadaEntSai[0][1];
     bool chegou = false;
 
     for (int i = 0; i < ti->qtdMovimentos; i++)
     {
+        // a proxima posição recebe a coordenada atual
         int novaY = posAtualY;
         int novaX = posAtualX;
 
-        // calcula a tentativa de passo
+        //"calcula" o movimento
         switch (ti->seqMovimentos[i])
         {
         case 'C':
@@ -191,11 +201,11 @@ int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti)
             break;
         }
 
-        // interrompe se bateu na #
+        // se bater em um muro, interrompe o loop
         if (matriz[novaY][novaX] == '#')
             break;
 
-        // marca o passo
+        // marca o movimento no mapa
         if (matriz[posAtualY][posAtualX] == ' ')
             matriz[posAtualY][posAtualX] = '.';
 
@@ -203,7 +213,7 @@ int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti)
         posAtualY = novaY;
         posAtualX = novaX;
 
-        // verifica se chegou na saída
+        // checa se chegou na saída
         if (matriz[posAtualY][posAtualX] == 'S')
         {
             chegou = true;
@@ -211,6 +221,8 @@ int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti)
         }
     }
 
+    // se chegou de verdade, mostra e exporta o mapa.
+    // Caso contrario, retorna 0
     if (chegou)
     {
         mapaVisualizar(matriz);
@@ -221,4 +233,25 @@ int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti)
     {
         return 0;
     }
+}
+
+bool TIndividuoCriaArquivoCSV()
+{
+    FILE *fptr;
+    fptr = fopen("..\\..\\projetoLabirintoReborn\\dados\\arquivoCSV.txt", "w");
+
+    fclose(fptr);
+    return true;
+}
+
+bool TIndividuoGuardaFitnessCSV(float num)
+{
+    FILE *fptr;
+    fptr = fopen("..\\..\\projetoLabirintoReborn\\dados\\arquivoCSV.txt", "a");
+
+    fprintf(fptr, "%2.f;", num);
+
+    fclose(fptr);
+
+    return true;
 }

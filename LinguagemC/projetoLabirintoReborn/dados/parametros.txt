@@ -1,1 +1,7 @@
-// alterar para cfg (?)
+mapa_altura=10;
+mapa_largura=10;
+penalidade_fitness=400;
+porcentagem_mutacao=15;
+quantidade_maxima_movimentos=30;
+populacao_maxima=100;
+porcentagem_melhores=25;

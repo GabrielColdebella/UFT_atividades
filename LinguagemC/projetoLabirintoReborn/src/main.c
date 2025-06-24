@@ -1,5 +1,5 @@
+#include "Parametros.h"
 #include "Populacao.h"
-#include "Utilitario.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,22 +8,26 @@
 
 int main()
 {
+    TIndividuoCriaArquivoCSV();
     srand(time(NULL));
 
+    // inicializa as variaveis e cria uma população inicial
     int geracao = 0;
     int sair = 0;
+    float melhorFitness = 0, melhorFitnessGeracao = 0;
     TLinkedList *pop = criar_populacao_inicial();
 
-    // && geracao < 2
-    while (sair != 1)
+    while (sair != 1 && geracao < 1000)
     {
         printf("Geracao: %d\n", geracao);
-        sair = populacao_percorre(pop);
+        sair = populacao_percorre(pop, &melhorFitnessGeracao);
+
+        if (melhorFitnessGeracao > melhorFitness)
+            melhorFitness = melhorFitnessGeracao;
 
         if (sair == 1)
         {
-            printf("Encerrou na geracao: %d\n", geracao);
-            // lista_imprime(pop);
+            printf("\nEncerrou na geracao: %d\n", geracao);
             break;
         }
         else
@@ -34,6 +38,6 @@ int main()
         }
         geracao++;
     }
-
+    printf("\nMelhor fitness de todos: %2.f\n", melhorFitness);
     return 0;
 }

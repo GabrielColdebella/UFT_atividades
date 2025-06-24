@@ -59,7 +59,8 @@ bool lista_insere_fim(TLinkedList *lista, TIndividuo conteudo)
 
 void lista_imprime(TLinkedList *lista)
 {
-    if (lista == NULL) {
+    if (lista == NULL)
+    {
         printf("Lista esta nula\n");
         return;
     }
@@ -95,12 +96,14 @@ TNo *TNo_criaEPreenche(TIndividuo conteudo)
 // concatena 2 listas
 TLinkedList *lista_concatenar(TLinkedList *l1, TLinkedList *l2)
 {
+    // se l1 estiver vazia, retorna l2
     if (!l1->inicio)
     {
         free(l1);
         return l2;
     }
 
+    // percorre até o último nó e faz apontar para o começo de l2
     TNo *aux = l1->inicio;
     while (aux->prox)
         aux = aux->prox;
@@ -176,22 +179,35 @@ TLinkedList *criar_populacao_inicial()
     return popInicial;
 }
 
-int populacao_percorre(TLinkedList *lista)
+int populacao_percorre(TLinkedList *lista, float *melhorFitness)
 {
     TNo *aux = lista->inicio;
+    *melhorFitness = 0;
+    int resultado;
+
     while (aux != NULL)
     {
-        if(TIndividuoPercorre(&aux->conteudo)){
+        resultado = TIndividuoPercorre(&aux->conteudo);
+
+        if (aux->conteudo.fitness > *melhorFitness)
+            *melhorFitness = aux->conteudo.fitness;
+
+        if (resultado == 1)
+        {
             printf("\nseq de movimentos do ganhador\t");
             for (int i = 0; i < qtdMovimentosMax; i++)
             {
                 printf("%c, ", aux->conteudo.seqMovimentos[i]);
             }
+            *melhorFitness = aux->conteudo.fitness;
+            TIndividuoGuardaFitnessCSV(*melhorFitness);
             TIndividuoVisualizarSeqMovimentos(&aux->conteudo);
             return 1;
-        };
+        }
         aux = aux->prox;
     }
+
+    TIndividuoGuardaFitnessCSV(*melhorFitness);
     return 0;
 }
 
@@ -245,6 +261,6 @@ TLinkedList *populacao_substituicao(TLinkedList *lista)
     {
         lista_insere_fim(nova, TIndividuoCriar());
     }
-    
+
     return nova;
 }

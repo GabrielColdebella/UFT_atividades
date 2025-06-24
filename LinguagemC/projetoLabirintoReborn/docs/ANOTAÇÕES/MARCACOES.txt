@@ -18,7 +18,7 @@ Site da usp falando sobre listas:
 https://www.ime.usp.br/~pf/algoritmos/aulas/lista.html
 
 RUN COMMAND:
-gcc .\main.c .\Individuo.c .\Populacao.c .\Mapa.c .\Utilitario.c .\Simulacao.c -o programa.exe
+gcc .\main.c .\Individuo.c .\Populacao.c .\Mapa.c -o programa.exe
 .\programa.exe
 
 lista estatica:
