@@ -179,18 +179,24 @@ TLinkedList *criar_populacao_inicial()
     return popInicial;
 }
 
-int populacao_percorre(TLinkedList *lista, float *melhorFitness)
+int populacao_percorre(TLinkedList *lista, float *melhorFitness, char const *argv)
 {
     TNo *aux = lista->inicio;
     *melhorFitness = 0;
     int resultado;
+    int static idGeracao = 0;
 
     while (aux != NULL)
     {
-        resultado = TIndividuoPercorre(&aux->conteudo);
+        resultado = TIndividuoPercorre(&aux->conteudo, argv);
 
+        TIndividuoGuardaFitnessCSV(&aux->conteudo, idGeracao);
+        // TIndividuoImprime(aux->conteudo);
+        
         if (aux->conteudo.fitness > *melhorFitness)
+        {
             *melhorFitness = aux->conteudo.fitness;
+        }
 
         if (resultado == 1)
         {
@@ -200,14 +206,18 @@ int populacao_percorre(TLinkedList *lista, float *melhorFitness)
                 printf("%c, ", aux->conteudo.seqMovimentos[i]);
             }
             *melhorFitness = aux->conteudo.fitness;
-            TIndividuoGuardaFitnessCSV(*melhorFitness);
-            TIndividuoVisualizarSeqMovimentos(&aux->conteudo);
+            TIndividuoGuardaFitnessCSV(&aux->conteudo, idGeracao);
+            TIndividuoVisualizarSeqMovimentos(&aux->conteudo, argv);
             return 1;
+        }
+        else if (resultado == 2)
+        {
+            return 2;
         }
         aux = aux->prox;
     }
 
-    TIndividuoGuardaFitnessCSV(*melhorFitness);
+    idGeracao++;
     return 0;
 }
 

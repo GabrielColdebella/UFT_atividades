@@ -1,5 +1,6 @@
 #include "Mapa.h"
 #include <stdio.h>
+#include <string.h>
 
 void mapaVisualizar(char matriz[MAPHEI][MAPWID])
 {
@@ -13,9 +14,14 @@ void mapaVisualizar(char matriz[MAPHEI][MAPWID])
     }
 }
 
-bool mapaImportar(char matriz[MAPHEI][MAPWID], int coordenada[2][2])
+bool mapaImportar(char matriz[MAPHEI][MAPWID], int coordenada[2][2], char const *argv)
 {
-    FILE *fptr = fopen("..\\..\\projetoLabirintoReborn\\dados\\mapa.txt", "r");
+    FILE *fptr = fopen(argv, "r");
+
+    if (fptr == NULL) {
+        perror("Erro ao abrir o arquivo");
+        return false;
+    }
     //C:\\Users\\ghcso\\Documents\\UFT\\Programacao\\LinguagemC\\projetoLabirintoReborn\\dados\\mapa.txt
     // projetoLabirintoReborn\\dados\\mapa.txt
 

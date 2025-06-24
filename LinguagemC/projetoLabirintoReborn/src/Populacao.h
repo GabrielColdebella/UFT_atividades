@@ -64,7 +64,7 @@ TLinkedList *criar_populacao_inicial();
  * @param lista
  * @return bool informando o sucesso da operação
  */
-int populacao_percorre(TLinkedList *lista, float *melhorFitnessGeracao);
+int populacao_percorre(TLinkedList *lista, float *melhorFitnessGeracao, char const *argv);
 
 /**
  * Pega os primeiros individuos de uma lista e gera filhos

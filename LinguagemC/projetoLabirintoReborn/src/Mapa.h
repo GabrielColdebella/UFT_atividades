@@ -15,7 +15,7 @@ void mapaVisualizar(char matriz[MAPHEI][MAPWID]);
  * @param coordenada - Coordenada de entrada e saída do labirinto
  * @return bool informando o sucesso da operação
  */
-bool mapaImportar(char matriz[MAPHEI][MAPWID], int coordenada[2][2]);
+bool mapaImportar(char matriz[MAPHEI][MAPWID], int coordenada[2][2], char const *argv);
 
 /**
  * Exporta o mapa gerado para um arquivo de texto na pasta do projeto.

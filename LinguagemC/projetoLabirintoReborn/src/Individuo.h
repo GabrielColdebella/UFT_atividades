@@ -9,7 +9,6 @@
 typedef struct
 {
     int id;
-    int qtdMovimentos;
     char seqMovimentos[qtdMovimentosMax];
     float fitness;
 } TIndividuo;
@@ -17,7 +16,6 @@ typedef struct
 /**
  * Monta o individuo, inserindo:
  * static id para tornar cada individuo unico
- * qtdMovimentos
  * fitness para mostrar a eficiencia
  * seqMovimentos de forma aleatoria
  * @return TIndividuo
@@ -36,7 +34,7 @@ void TIndividuoImprime(TIndividuo);
  * @param TIndividuo
  * @return int - se a operação foi um sucesso ou não.
  */
-int TIndividuoPercorre(TIndividuo *ti);
+int TIndividuoPercorre(TIndividuo *ti, char const *argv);
 
 /**
  * Gera um filho com os genes de ambos os pais.
@@ -53,9 +51,9 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2);
  * @param TIndividuo
  * @return int - A verificação se o individuo chegou mesmo na saída.
  */
-int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti);
+int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti, char const *argv);
 
 bool TIndividuoCriaArquivoCSV();
 
-bool TIndividuoGuardaFitnessCSV(float num);
+bool TIndividuoGuardaFitnessCSV(TIndividuo *ti, int id);
 #endif

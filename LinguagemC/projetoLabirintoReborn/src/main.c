@@ -1,13 +1,15 @@
 #include "Parametros.h"
 #include "Populacao.h"
+#include "Gerador.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
 #include <math.h>
 
-int main()
+int main(int argc, char const *argv[])
 {
+    resgata_parametros_de_arquivo(argv[2]);
     TIndividuoCriaArquivoCSV();
     srand(time(NULL));
 
@@ -17,10 +19,10 @@ int main()
     float melhorFitness = 0, melhorFitnessGeracao = 0;
     TLinkedList *pop = criar_populacao_inicial();
 
-    while (sair != 1 && geracao < 1000)
+    while (sair != 1 && geracao < 100)
     {
         printf("Geracao: %d\n", geracao);
-        sair = populacao_percorre(pop, &melhorFitnessGeracao);
+        sair = populacao_percorre(pop, &melhorFitnessGeracao, argv[1]);
 
         if (melhorFitnessGeracao > melhorFitness)
             melhorFitness = melhorFitnessGeracao;
@@ -28,6 +30,11 @@ int main()
         if (sair == 1)
         {
             printf("\nEncerrou na geracao: %d\n", geracao);
+            break;
+        }
+        else if (sair == 2)
+        {
+            printf("\nHouve um problema ao carregar o mapa");
             break;
         }
         else

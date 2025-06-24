@@ -9,7 +9,6 @@ TIndividuo TIndividuoCriar()
 
     // acessa o individuo e insere os dados
     ti.id = idIndividuo++;
-    ti.qtdMovimentos = qtdMovimentosMax;
     ti.fitness = 0;
 
     // monta aleatoriamente a sequencia de movimentos do invididuo
@@ -40,24 +39,39 @@ void TIndividuoImprime(TIndividuo ti)
     printf("Fitness: %f\n", ti.fitness);
 }
 
-int TIndividuoPercorre(TIndividuo *ti)
+int TIndividuoPercorre(TIndividuo *ti, char const *argv)
 {
     // inicializa variaveis e logo preenche com os dados do mapa
     // formato do labirinto e coordenada da entrada e saida
     char matriz[MAPHEI][MAPWID];
     int coordenadaEntSai[2][2], i;
-    mapaImportar(matriz, coordenadaEntSai);
+    if (!mapaImportar(matriz, coordenadaEntSai, argv))
+        return 2;
 
     // monta a posição atual y e x de acordo com a coordenada da entrada
     int posAtualY = coordenadaEntSai[0][0];
     int posAtualX = coordenadaEntSai[0][1];
     int chegou = false;
+    int j;
 
-    for (i = 0; i < ti->qtdMovimentos; i++)
+    for (i = 0; i < qtdMovimentosMax; i++)
     {
         // a proxima posição recebe a coordenada atual
         int novaY = posAtualY;
         int novaX = posAtualX;
+
+        char possiveis[4];
+        j = 0;
+
+        // checar movimentos válidos
+        if (matriz[novaY - 1][novaX] != '#') possiveis[j++] = 'C';
+        if (matriz[novaY + 1][novaX] != '#') possiveis[j++] = 'B';
+        if (matriz[novaY][novaX + 1] != '#') possiveis[j++] = 'D';
+        if (matriz[novaY][novaX - 1] != '#') possiveis[j++] = 'E';
+        if (j == -1) break; 
+
+        // escolher aleatório entre os válidos
+        ti->seqMovimentos[i]  = possiveis[rand() % j];
 
         //"calcula" o movimento
         switch (ti->seqMovimentos[i])
@@ -165,20 +179,20 @@ TIndividuo TIndividuoCrossover(TIndividuo *pai1, TIndividuo *pai2)
     return filho;
 }
 
-int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti)
+int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti, char const *argv)
 {
     // inicializa variaveis e logo preenche com os dados do mapa
     // formato do labirinto e coordenada da entrada e saida
     char matriz[MAPHEI][MAPWID];
     int coordenadaEntSai[2][2];
-    mapaImportar(matriz, coordenadaEntSai);
+    mapaImportar(matriz, coordenadaEntSai, argv);
 
     // monta a posição atual y e x de acordo com a coordenada da entrada
     int posAtualY = coordenadaEntSai[0][0];
     int posAtualX = coordenadaEntSai[0][1];
     bool chegou = false;
 
-    for (int i = 0; i < ti->qtdMovimentos; i++)
+    for (int i = 0; i < qtdMovimentosMax; i++)
     {
         // a proxima posição recebe a coordenada atual
         int novaY = posAtualY;
@@ -244,12 +258,18 @@ bool TIndividuoCriaArquivoCSV()
     return true;
 }
 
-bool TIndividuoGuardaFitnessCSV(float num)
+bool TIndividuoGuardaFitnessCSV(TIndividuo *ti, int id)
 {
     FILE *fptr;
     fptr = fopen("..\\..\\projetoLabirintoReborn\\dados\\arquivoCSV.txt", "a");
 
-    fprintf(fptr, "%2.f;", num);
+    fprintf(fptr, "%d;%2.f;", id, ti->fitness);
+
+    for (int j = 0; j < qtdMovimentosMax; j++)
+    {
+        fprintf(fptr, "%c", ti->seqMovimentos[j]);
+    }
+    fprintf(fptr, ";\n");
 
     fclose(fptr);
 
