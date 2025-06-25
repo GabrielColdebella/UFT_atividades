@@ -112,7 +112,7 @@ Indivíduos mais inteligentes em mapa 3
 
 https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=181846318&format=interactive
 
-![fitness](https://github.com/user-attachments/assets/069cf121-2a1f-461f-8f81-6db3c8eff558)
+![fitness (3)](https://github.com/user-attachments/assets/e777496f-ce81-4ab2-a81c-9bf97c30f6a3)
 
 
 Caso 4: 
