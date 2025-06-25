@@ -22,14 +22,12 @@ int resgata_parametros_de_arquivo(char const *caminho)
     {
         if (sscanf(linha, "%[^=]=%d", chave, &valor) == 2)
         {
-            // Remove espaços extras
             for (char *p = chave; *p; p++)
             {
                 if (*p == ' ')
                     *p = '\0';
             }
 
-            // Atribui conforme a chave
             if (strstr(linha, "mapa_altura"))
                 bufferValor[0] = valor;
             else if (strstr(linha, "mapa_largura"))
@@ -47,7 +45,6 @@ int resgata_parametros_de_arquivo(char const *caminho)
         }
     }
 
-    // Escreve no .h com os nomes fixos
     fprintf(arquivoSaida, "#ifndef PARAMETROS_H\n");
     fprintf(arquivoSaida, "#define PARAMETROS_H\n\n");
     fprintf(arquivoSaida, "#define MAPHEI %d\n", bufferValor[0]);
@@ -58,8 +55,6 @@ int resgata_parametros_de_arquivo(char const *caminho)
     fprintf(arquivoSaida, "#define maxPopulacao %d\n", bufferValor[5]);
     fprintf(arquivoSaida, "#define porcentagemMelhores %d\n", bufferValor[6]);
     fprintf(arquivoSaida, "#endif\n");
-
-
 
     fclose(fptrEntrada);
     fclose(arquivoSaida);

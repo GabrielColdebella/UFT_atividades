@@ -14,7 +14,7 @@ int main(int argc, char const *argv[])
     srand(time(NULL));
 
     // inicializa as variaveis e cria uma população inicial
-    int geracao = 0;
+    int geracao = 1;
     int sair = 0;
     float melhorFitness = 0, melhorFitnessGeracao = 0;
     TLinkedList *pop = criar_populacao_inicial();

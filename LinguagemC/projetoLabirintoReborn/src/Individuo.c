@@ -252,7 +252,7 @@ int TIndividuoVisualizarSeqMovimentos(TIndividuo *ti, char const *argv)
 bool TIndividuoCriaArquivoCSV()
 {
     FILE *fptr;
-    fptr = fopen("..\\..\\projetoLabirintoReborn\\dados\\arquivoCSV.txt", "w");
+    fptr = fopen("..\\..\\projetoLabirintoReborn\\dados\\logExperimento.csv", "w");
 
     fclose(fptr);
     return true;
@@ -261,7 +261,7 @@ bool TIndividuoCriaArquivoCSV()
 bool TIndividuoGuardaFitnessCSV(TIndividuo *ti, int id)
 {
     FILE *fptr;
-    fptr = fopen("..\\..\\projetoLabirintoReborn\\dados\\arquivoCSV.txt", "a");
+    fptr = fopen("..\\..\\projetoLabirintoReborn\\dados\\logExperimento.csv", "a");
 
     fprintf(fptr, "%d;%2.f;", id, ti->fitness);
 

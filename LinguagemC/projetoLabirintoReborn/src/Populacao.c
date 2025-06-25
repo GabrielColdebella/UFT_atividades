@@ -184,7 +184,7 @@ int populacao_percorre(TLinkedList *lista, float *melhorFitness, char const *arg
     TNo *aux = lista->inicio;
     *melhorFitness = 0;
     int resultado;
-    int static idGeracao = 0;
+    int static idGeracao = 1;
 
     while (aux != NULL)
     {
@@ -206,7 +206,6 @@ int populacao_percorre(TLinkedList *lista, float *melhorFitness, char const *arg
                 printf("%c, ", aux->conteudo.seqMovimentos[i]);
             }
             *melhorFitness = aux->conteudo.fitness;
-            TIndividuoGuardaFitnessCSV(&aux->conteudo, idGeracao);
             TIndividuoVisualizarSeqMovimentos(&aux->conteudo, argv);
             return 1;
         }
