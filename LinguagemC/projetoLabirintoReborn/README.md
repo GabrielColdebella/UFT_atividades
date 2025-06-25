@@ -108,7 +108,7 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6
 
 
 Caso 3:
-Indivíduos mais inteligentes em mapa 3
+Indivíduos mais inteligentes em mapa 1 (alternativo)
 
 https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=181846318&format=interactive
 
@@ -116,7 +116,7 @@ https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6
 
 
 Caso 4: 
-Indivíduos mais inteligentes em mapa 4
+Indivíduos mais inteligentes em mapa 2
 
 https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=131968439&format=interactive
 ![fitness (2)](https://github.com/user-attachments/assets/21b0e18d-09fb-4e99-b6d3-61ab53c34392)
