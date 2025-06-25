@@ -88,22 +88,35 @@ porcentagem_melhores=...
 
 ## 📋 Gráficos:
 
+link do sheets:
+
+https://docs.google.com/spreadsheets/d/1Jj3J9SHiJPX5agk3cHxSpLXCjWNwFx-tyz6KuSjDios/edit?usp=sharing
+
 Caso 1:
 Indivíduos normais em mapa 1
 
 https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=618130886&format=interactive
+
+![Histograma de fitness](https://github.com/user-attachments/assets/53da7ec2-a9e0-4ca3-81fd-785e28cc2f20)
 
 Caso 2: 
 Indivíduos normais em mapa 2
 
 https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=1383601889&format=interactive
 
+![fitness](https://github.com/user-attachments/assets/9448fdfe-e155-491c-9831-b49a32402e99)
+
+
 Caso 3:
 Indivíduos mais inteligentes em mapa 3
 
 https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=181846318&format=interactive
 
+![fitness](https://github.com/user-attachments/assets/069cf121-2a1f-461f-8f81-6db3c8eff558)
+
+
 Caso 4: 
 Indivíduos mais inteligentes em mapa 4
 
 https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=131968439&format=interactive
+![fitness (2)](https://github.com/user-attachments/assets/21b0e18d-09fb-4e99-b6d3-61ab53c34392)
