@@ -85,3 +85,25 @@ quantidade_maxima_movimentos=...
 populacao_maxima=...
 porcentagem_melhores=...
 ```
+
+## 📋 Gráficos:
+
+Caso 1:
+Indivíduos normais em mapa 1
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=618130886&format=interactive
+
+Caso 2: 
+Indivíduos normais em mapa 2
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=1383601889&format=interactive
+
+Caso 3:
+Indivíduos mais inteligentes em mapa 3
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=181846318&format=interactive
+
+Caso 4: 
+Indivíduos mais inteligentes em mapa 4
+
+https://docs.google.com/spreadsheets/d/e/2PACX-1vS4D4LS-ZXevqVMjpzKuRG5lHXV-2EF6lGl5hYW5Du1z4yknVZ1iaYWh-aUTJoQNo13-iPe4DnO7jnk/pubchart?oid=131968439&format=interactive
